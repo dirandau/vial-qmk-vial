@@ -2,6 +2,23 @@
 
 #pragma once
 
+/* 기존 MATRIX_ROWS / MATRIX_COLS 설정이 있다면 3으로 지정 */
+#undef MATRIX_ROWS
+#undef MATRIX_COLS
+#define MATRIX_ROWS 3
+#define MATRIX_COLS 3
+
+/* 다이렉트 핀 배열을 C 헤더에 직접 명시 */
+#define DIRECT_PINS { \
+    { GP29, GP28, GP27 }, \
+    { GP26, GP15, GP14 }, \
+    { GP5,  GP6,  GP7  }  \
+}
+
+/* 스위치가 눌렸을 때 GND(0)로 떨어지는 풀업 모드 강제 */
+#undef MATRIX_INPUT_PRESSED_STATE
+#define MATRIX_INPUT_PRESSED_STATE 0
+
 /* RP2040 SPI0 주변장치 지정 */
 #ifndef SPI_DRIVER
 #    define SPI_DRIVER SPID0
