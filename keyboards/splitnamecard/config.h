@@ -38,8 +38,12 @@
 #ifndef POINTING_DEVICE_INVERT_Y
 #    define POINTING_DEVICE_INVERT_Y
 #endif
-#ifndef PMW33XX_CLOCK_SPEED
-#    define PMW33XX_CLOCK_SPEED 2000000
+/* SPI 클럭: RP2040에서는 PMW33XX_CLOCK_SPEED가 무시되고 분주비만 적용됨.
+ * 드라이버 기본값 64는 125MHz/64 ≈ 1.95MHz로 PMW3360 한계(2MHz)에 붙어 있어
+ * delta 값이 깨지는 현상이 있었음. 128(약 977kHz)에서도 최상위 비트가 깨져서
+ * 최대 분주비 254(약 490kHz)로 낮춤 */
+#ifndef PMW33XX_SPI_DIVISOR
+#    define PMW33XX_SPI_DIVISOR 254
 #endif
 
 /* 리프트오프 거리(Lift-off Distance) 최소화하여 센서 튐 현상 방지 */
