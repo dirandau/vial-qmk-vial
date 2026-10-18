@@ -46,6 +46,12 @@
 #    define PMW33XX_SPI_DIVISOR 254
 #endif
 
+/* 센서 읽기 간격: 기본 1ms마다 읽으면 SPI 비트 깨짐이 늘어 복원 필터를 빠져나가는 튐이 생김.
+ * 진단 로깅을 켰을 때는 루프가 느려져 증상이 가려졌음. 4ms(250Hz)에서 안정적으로 확인됨 */
+#ifndef POINTING_DEVICE_TASK_THROTTLE_MS
+#    define POINTING_DEVICE_TASK_THROTTLE_MS 4
+#endif
+
 /* 리프트오프 거리(Lift-off Distance) 최소화하여 센서 튐 현상 방지 */
 #ifndef PMW33XX_LIFTOFF_DISTANCE
 #    define PMW33XX_LIFTOFF_DISTANCE 0x00
